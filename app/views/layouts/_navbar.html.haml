@@ -3,15 +3,17 @@
     %nav.bs-docs-nav.navbar-collapse{role: "navigation"}
       %ul.nav.navbar-nav
         %li
-          %a{href: "../getting-started"} Getting started
-        %li
-          %a{href: "../css"} CSS
-        %li.active
-          %a{href: "../components"} Components
-        %li
-          %a{href: "../javascript"} JavaScript
-        %li
-          %a{href: "../customize"} Customize
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{href: "../about"} About
+          %a{href: ""} Yleistin
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            Language
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              %a{href: "#"} English
+            %li
+              %a{href: "#"} Finnish
+            %li.divider
+      -#%ul.nav.navbar-nav.navbar-right
+      -#  %li
+      -#    %a{href: "/users/sign_out"} Sign Out
