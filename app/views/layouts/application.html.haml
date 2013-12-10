@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+      %title= content_for?(:title) ? yield(:title) : "yleistin"
+      %meta{:content => content_for?(:description) ? yield(:description) : "yleistin", :name => "description"}
+        = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+        = javascript_include_tag "application", "data-turbolinks-track" => true
+        = csrf_meta_tags
+        = yield(:head)
+  #wrapper
+  #container
+    %section#section1.section{"data-section" => "1"}
+      .container-fluid
+        .row-fluid
+          = yield
+        / /row-fluid
+      / /container-fluid
+    / /section
