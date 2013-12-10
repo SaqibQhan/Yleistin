@@ -1,11 +1,7 @@
 common: &common
-  pool: 5
-  adapter: postgresql
-  encoding: unicode
-  host: localhost
-  port: 5432
-  username: postgres
-  password: postgres
+  adapter: mysql2
+  username: root
+  password: root
 
 development:
   <<: *common
