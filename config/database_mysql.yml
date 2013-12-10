@@ -1,0 +1,16 @@
+common: &common
+  adapter: mysql2
+  username: root
+  password: root
+
+development:
+  <<: *common
+  database: yleistin_development
+
+test:
+  <<: *common
+  database: yleistin_test
+
+production:
+  <<: *common
+  database: yleistin_production

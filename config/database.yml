@@ -1,0 +1,20 @@
+common: &common
+  pool: 5
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+
+development:
+  <<: *common
+  database: yleistin_development
+
+test:
+  <<: *common
+  database: yleistin_test
+
+production:
+  <<: *common
+  database: yleistin_production
