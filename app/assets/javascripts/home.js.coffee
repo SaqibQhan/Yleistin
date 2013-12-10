@@ -1,29 +1,24 @@
 $ ->
   $(document).ready ->
-    $("#sign_up_form").validate
-      rules:
-        "user[name]":
-          required: true
-
-        "user[email]":
-          required: true
-          email: true
-
-        "user[password]":
-          required: true
-          minlength: 8
-
-        "user[password_confirmation]":
-          required: true
-          minlength: 8
-          equalTo : "#password"
-
-    $("#sign_in_form").validate
-      rules:
-        "user[email]":
-          required: true
-          email: true
-
-        "user[password]":
-          required: true
-          minlength: 8
+    $('.submitAnswer').click ->
+      type = $(this).attr('id')
+      l_count = parseInt($('#question_limit').val())
+      q_count = parseInt($('#question_count').val())
+      y_count = parseInt($('#yes_count').val())
+      n_count = parseInt($('#no_count').val())
+      u_count = parseInt($('#up_count').val())
+      d_count = parseInt($('#down_count').val())
+      a_count = parseFloat($('#add_subtract_count').val())
+      if (parseInt(q_count) <= l_count)
+        $('#question_count').val(parseInt(q_count + 1))
+        if (parseInt(q_count + 1) <= l_count)
+          $('#randQuest_' + q_count).css('display', 'none')
+          $('#randQuest_' + parseInt(q_count + 1)).css('display', 'block')
+        if type is 'yes'
+          $('#yes_count').val(parseInt(y_count + 1))
+          $('#gKwldgEstUp').html(parseFloat(u_count + a_count) + ' -')
+          $('#up_count').val(parseFloat(u_count + a_count))
+        else if type is 'no'
+          $('#no_count').val(parseInt(n_count + 1))
+          $('#gKwldgEstDown').html(parseFloat(d_count - a_count) + '%')
+          $('#down_count').val(parseFloat(d_count - a_count))

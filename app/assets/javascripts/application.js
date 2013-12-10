@@ -19,5 +19,5 @@
 //= require turbolinks
 //= require validate/jquery.validate
 //= require leaflet
+//= require home.js.coffee
 //= require_tree .
-
