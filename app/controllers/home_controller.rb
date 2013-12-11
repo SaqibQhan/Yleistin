@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   #before_filter :authenticate_user!
   def index
     @questions = Question.all
-    random = Random.new.rand(1...@questions.count)
-    @rand_questions = @questions.order("RAND()").limit(random)
+    random = rand(1...@questions.count)
+    @rand_questions = @questions.order("RANDOM()").limit(random)
   end
 
 end
