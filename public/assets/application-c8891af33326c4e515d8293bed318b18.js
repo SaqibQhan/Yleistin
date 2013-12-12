@@ -31281,7 +31281,7 @@ $.format = $.validator.format;
             return e.removeClass("active")
         }, o = function () {
             var t;
-            return t = r[$(this).data("network")], "facebook" === $(this).data("network") && n.app_id ? window.FB.ui({method: "feed", name: n.fb_title, link: n.fb_url, picture: n.fb_image, caption: n.fb_caption, description: n.fb_text}) : window.open(t, "targetWindow", "toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=500,height=350"), !1
+            return t = r[$(this).data("network")], "facebook" === $(this).data("network") && n.app_id ? window.FB.ui({method: "feed", name: n.fb_title, link: n.fb_url, picture: n.fb_image, caption: n.fb_caption, description: "n.fb_text", message: "test"}) : window.open(t, "targetWindow", "toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=500,height=350"), !1
         }, $(this).find("label").on("click", s), $(this).find("li").on("click", o), $("body").on("click", function () {
             return e.hasClass("active") ? e.removeClass("active") : void 0
         }), setTimeout(function () {
@@ -31325,18 +31325,12 @@ $.format = $.validator.format;
           share_text = $("#up_count").val() + ' - ' + $("#down_count").val();
           return $(".shareCircle").share({
             url: share_url,
-            text: "My general knowledge ranges " + share_text,
+            text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin",
+            link: share_url,
             facebook: {
-              text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin",
-              link: share_url
-            },
-            twitter: {
-              text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin",
-              link: share_url
-            },
-            gplus: {
-              text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin",
-              link: share_url
+              name: 'Yleistin',
+              title: 'Yleistin',
+              text: 'short description'
             }
           });
         }
