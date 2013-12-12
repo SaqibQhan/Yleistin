@@ -3,6 +3,23 @@
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
       %title= content_for?(:title) ? yield(:title) : "yleistin"
+      / for Google
+      %meta{content: "The Turducken of Cookies", name: "description"}/
+      %meta{content: "abc", name: "keywords"}/
+      %meta{content: "abc", name: "author"}/
+      %meta{content: "abc", name: "copyright"}/
+      %meta{content: "abc", name: "application-name"}/
+      / for Facebook
+      %meta{content: "Stuffed Cookies", property: "og:title"}/
+      %meta{content: "article", property: "og:type"}/
+      %meta{content: "http://fbwerks.com:8000/zhen/cookie.jpg", property: "og:image"}/
+      %meta{content: "http://fbwerks.com:8000/zhen/cookie.html", property: "og:url"}/
+      %meta{content: "The Turducken of Cookies", property: "og:description"}/
+      / for Twitter
+      %meta{content: "summary", name: "twitter:card"}/
+      %meta{content: "ABC", name: "twitter:title"}/
+      %meta{content: "The Turducken of Cookies", name: "twitter:description"}/
+      %meta{content: "http://fbwerks.com:8000/zhen/cookie.jpg", name: "twitter:image"}/
       %meta{:content => content_for?(:description) ? yield(:description) : "yleistin", :name => "description"}
         = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
         = javascript_include_tag "application", "data-turbolinks-track" => true
