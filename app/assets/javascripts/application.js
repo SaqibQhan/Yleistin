@@ -18,6 +18,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require validate/jquery.validate
-//= require leaflet
+//= require share.min.js
 //= require home.js.coffee
 //= require_tree .

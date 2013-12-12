@@ -16,9 +16,30 @@ $ ->
           $('#randQuest_' + parseInt(q_count + 1)).css('display', 'block')
         if type is 'yes'
           $('#yes_count').val(parseInt(y_count + 1))
-          $('#gKwldgEstUp').html(parseFloat(u_count + a_count) + ' -')
-          $('#up_count').val(parseFloat(u_count + a_count))
+          $('#gKwldgEstUp').html(parseFloat(u_count + a_count).toFixed(2) + ' -')
+          $('#up_count').val(parseFloat(u_count + a_count).toFixed(2))
         else if type is 'no'
           $('#no_count').val(parseInt(n_count + 1))
-          $('#gKwldgEstDown').html(parseFloat(d_count - a_count) + '%')
-          $('#down_count').val(parseFloat(d_count - a_count))
+          $('#gKwldgEstDown').html(parseFloat(d_count - a_count).toFixed(2) + '%')
+          $('#down_count').val(parseFloat(d_count - a_count).toFixed(2))
+      else
+        $('#shareCircle').show()
+        $('#questionsContainer').hide()
+
+        #  SHARE
+
+        share_url = window.location
+        share_text = $("#up_count").val() + ' - ' + $("#down_count").val()
+        $(".shareCircle").share
+          facebook:
+            link: share_url
+            text: "My general knowledge ranges " + share_text
+
+          twitter:
+            text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin"
+            link: share_url
+
+          gplus:
+            link: share_url
+            text: "My general knowledge ranges " + share_text
+
