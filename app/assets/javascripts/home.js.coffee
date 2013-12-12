@@ -34,9 +34,10 @@ $ ->
           url: share_url
           text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin"
           link: share_url
-          facebook: {
+          facebook:
             name: 'Yleistin'
             title: 'Yleistin'
             text: 'short description'
-          }
+
+
 
