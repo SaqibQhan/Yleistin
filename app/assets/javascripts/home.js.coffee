@@ -34,14 +34,14 @@ $ ->
           url: share_url
           text: "My general knowledge ranges " + share_text
           facebook:
+            text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin"
             link: share_url
-            text: "My general knowledge ranges " + share_text
 
           twitter:
             text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin"
             link: share_url
 
           gplus:
+            text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin"
             link: share_url
-            text: "My general knowledge ranges " + share_text
 
