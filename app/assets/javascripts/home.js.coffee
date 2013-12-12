@@ -31,6 +31,8 @@ $ ->
         share_url = window.location
         share_text = $("#up_count").val() + ' - ' + $("#down_count").val()
         $(".shareCircle").share
+          url: share_url
+          text: "My general knowledge ranges " + share_text
           facebook:
             link: share_url
             text: "My general knowledge ranges " + share_text
