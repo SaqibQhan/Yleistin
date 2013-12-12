@@ -37,6 +37,6 @@ $ ->
           facebook: {
             name: 'Yleistin'
             title: 'Yleistin'
-            description: 'short description'
+            text: 'short description'
           }
 
