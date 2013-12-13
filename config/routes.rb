@@ -7,6 +7,11 @@ Yleistin::Application.routes.draw do
   end
 
   resource :home
- root 'home#index'
+  resource :user_answers do
+    collection do
+      get :save_answers
+    end
+  end
+  root 'home#index'
 
 end

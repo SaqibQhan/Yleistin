@@ -12,6 +12,7 @@
       %p
         .shareCircle
     #questionsContainer
+      = hidden_field_tag "q_ids" , @rand_questions.map(&:id).join(",")
       -@rand_questions.each_with_index do |question, index|
         .randQuest{style: "display: #{index == 0 ? 'block': 'none'}",:id => "randQuest_#{index + 1}"}
           %h2#qNumber

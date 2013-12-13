@@ -1,5 +1,6 @@
 $ ->
   $(document).ready ->
+    answers = new Array();
     $('.submitAnswer').click ->
       type = $(this).attr('id')
       l_count = parseInt($('#question_limit').val())
@@ -18,13 +19,26 @@ $ ->
           $('#yes_count').val(parseInt(y_count + 1))
           $('#gKwldgEstUp').html(parseFloat(u_count + a_count).toFixed(2) + ' -')
           $('#up_count').val(parseFloat(u_count + a_count).toFixed(2))
+          answers.push(1)
         else if type is 'no'
           $('#no_count').val(parseInt(n_count + 1))
           $('#gKwldgEstDown').html(parseFloat(d_count - a_count).toFixed(2) + '%')
           $('#down_count').val(parseFloat(d_count - a_count).toFixed(2))
+          answers.push(0)
       else
+        q_ids = $('#q_ids').val()
         $('#shareCircle').show()
         $('#questionsContainer').hide()
+        $.ajax
+          url: '/user_answers/save_answers?q_ids='+ q_ids + '&answers='+ answers,
+          type: 'get',
+          dataType: 'html',
+          processData: false,
+          success: (data) ->
+
+
+
+
 
         #  SHARE
 
