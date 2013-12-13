@@ -5,6 +5,7 @@ class UserAnswersController < ApplicationController
       user = User.new(:current_sign_in_ip => request.remote_ip)
       user.save(:validate => false)
     end
+    delete_user_answers(user) unless user.blank?
     answers = []
     params[:answers].split(',').each_with_index do |answer, index|
       answers << answer
@@ -16,6 +17,16 @@ class UserAnswersController < ApplicationController
     end
 
     render :text => 'ok'
+  end
+
+  private
+  def delete_user_answers(user)
+    user_answers = UserAnswer.where(:user_id => user.id).load
+    unless user_answers.blank?
+      user_answers.each do |ans|
+        ans.destroy
+      end
+    end
   end
 
 end
