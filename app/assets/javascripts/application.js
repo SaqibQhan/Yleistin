@@ -20,4 +20,9 @@
 //= require validate/jquery.validate
 //= require share.min.js
 //= require home.js.coffee
+//= require highcharts/highcharts
+//= require highcharts/exporting
+//= require highcharts/highcharts-more
+//= require highcharts/mootools-adapter
+//= require highcharts/prototype-adapter
 //= require_tree .

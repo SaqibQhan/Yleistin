@@ -22,8 +22,8 @@
       %meta{content: "The Turducken of Cookies", name: "twitter:description"}/
       %meta{content: "http://fbwerks.com:8000/zhen/cookie.jpg", name: "twitter:image"}/
       %meta{:content => content_for?(:description) ? yield(:description) : "yleistin", :name => "description"}
-        = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-        = javascript_include_tag "application", "data-turbolinks-track" => true
+        = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false
+        = javascript_include_tag "application", "data-turbolinks-track" => false
         = csrf_meta_tags
         = yield(:head)
   #wrapper

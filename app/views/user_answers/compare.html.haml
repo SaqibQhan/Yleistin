@@ -1,0 +1,62 @@
+.row
+  .highlight.col-md-7.mainQuestCont
+    %h3 Comparison
+    - if @users.count < 2
+      %p There isn't any data available for comparison.
+    #compareContainer
+  .highlight.col-md-4
+    - if @user.blank?
+      - unless @link.blank?
+        %h5 Try out Yourself
+        %a.btn.btn-success{href: "/"}
+          %h3 Try out Yourself
+      -else
+        %h5 Reload Reset
+        %a.btn.btn-success{href: "/reset"}
+          %h3 Reload Reset
+
+    -else
+      %h5 Reload Reset
+      %a.btn.btn-success{href: "/reset"}
+        %h3 Reload Reset
+
+
+:javascript
+  $(function () {
+      $('#compareContainer').highcharts({
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false
+          },
+          title: {
+              text: 'Your Perfomance'
+          },
+          tooltip: {
+      	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: true,
+                      color: '#000000',
+                      connectorColor: '#000000',
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                  }
+              }
+          },
+          series: [{
+              type: 'pie',
+              name: 'Your Perfomance',
+              data: [
+                    #{topics_performance}
+              ]
+          }]
+      });
+  });
+
+
+
+

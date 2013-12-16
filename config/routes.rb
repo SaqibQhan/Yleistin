@@ -10,8 +10,14 @@ Yleistin::Application.routes.draw do
   resource :user_answers do
     collection do
       get :save_answers
+      get :compare
+      get :reset
     end
   end
+
+  match '/compare' , to: "user_answers#compare" , :via => [:get]
+  match '/reset' , to: "user_answers#reset" , :via => [:get]
+
   root 'home#index'
 
 end
