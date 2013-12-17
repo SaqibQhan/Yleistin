@@ -2,7 +2,7 @@
   .highlight.col-md-7.mainQuestCont
     %h3 Comparison
     #compareContainer
-    - if @users.count < 2
+    - if @users.count > 1
       #compareOtherContainer
       :javascript
         // Comparison with other
