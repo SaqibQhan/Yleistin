@@ -19,10 +19,27 @@ class UserAnswersController < ApplicationController
                                      :no => answers[index] == '0' ? true : false, :user_id => user.id)
     end
     UserAnswer.import user_answers
+    user_performance(user)
     render :text => 'ok'
   end
 
   def compare
+    @user_performance = @user.user_performances unless @user.blank?
+    @others_performance = []
+    @your_performance = []
+    @compare_topics = []
+    @user_performance.each do |u_performance|
+      performance_sum = 0
+      performances = UserPerformance.where('user_id != ? and topic_id = ?', @user.id, u_performance.topic_id)
+      unless performances.blank?
+        @your_performance << u_performance.performance
+        @compare_topics << u_performance.topic.title
+        performances.each do |p|
+          performance_sum = performance_sum + p.performance
+        end
+        @others_performance << (performance_sum.to_f / performances.count).to_f
+      end
+    end
     redirect_to root_path if @user.blank? and @link.blank?
   end
 
@@ -43,13 +60,31 @@ class UserAnswersController < ApplicationController
 
   def u_answer_variables
     @remote_ip = request.remote_ip
-    @remote_ip = "192.169.1.2"
+    #@remote_ip = "192.169.1.1"
     @user = User.find_by_current_sign_in_ip(@remote_ip)
     @users = User.all
     @link = params[:link]
     @user_answers = @user.user_answers unless @user.blank?
-    @rand_topics = $rand_questions.select(:title, :topic_id).map(&:topic_id).uniq unless $rand_questions.blank?
-    puts "AAAAAAAAAAAAAAAAAa",@rand_topics.inspect
+  end
+
+  protected
+
+  def user_performance(user)
+    @user_answers = user.user_answers unless @user.blank?
+    @user_questions = Question.where(:id => [@user_answers.map { |u_ans| u_ans.question_id }]) unless @user_answers.blank?
+    @uniq_questions = @user_questions.order('topic_id').pluck(:topic_id).uniq unless @user_questions.blank?
+    @rand_topics = Topic.where(:id => [@uniq_questions]) unless @uniq_questions.blank?
+    @performance_by_topic = @rand_topics.map { |topic| 100 }
+    u_performance = []
+    @rand_topics.each_with_index do |topic, index|
+      asked_questions = @user_questions.where(:topic_id => topic.id)
+      user_answer = UserAnswer.where(:user_id => user.id, :question_id => [asked_questions.map { |quest| quest.id }])
+      user_answer.each do |u_ans|
+        @performance_by_topic[index] = @performance_by_topic[index].to_f - (100/asked_questions.count.to_f).to_f if u_ans.no?
+      end
+      u_performance << UserPerformance.new(:user_id => user.id, :topic_id => topic.id, :performance => @performance_by_topic[index])
+    end
+    UserPerformance.import u_performance
   end
 
 end

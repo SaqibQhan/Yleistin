@@ -1,6 +1,6 @@
 puts "default topics"
 
-topics = ['leader', 'country', 'city/state', 'book', 'film', 'disease', 'actor', 'sport',
+topics = ['leader', 'country', 'state', 'book', 'film', 'disease', 'actor', 'sport',
           'river', 'mountain', 'fruit', 'website', 'video game', 'software', 'food',
           'animal', 'bird', 'newspaper', 'tv channel', 'machine', 'designer',
           'painter', 'musician', 'singer', 'writer', 'sportsman', 'hotel',
@@ -25,7 +25,7 @@ end
 
 cities = ['Jaddah', 'Stockholm', 'Helsinki']
 cities.each do |city|
-  topic = Topic.find_by_title('city/state')
+  topic = Topic.find_by_title('state')
   Question.find_or_create_by(:title => city, :topic_id => topic.id)
 end
 

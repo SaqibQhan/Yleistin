@@ -14,7 +14,7 @@ class HomeController < ApplicationController
 
   def home_variables
     @remote_ip = request.remote_ip
-    @remote_ip = "192.169.1.2"
+    #@remote_ip = "192.169.1.1"
     @user = User.find_by_current_sign_in_ip(@remote_ip)
   end
 

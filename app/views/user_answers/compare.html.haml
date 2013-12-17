@@ -4,6 +4,7 @@
     - if @users.count < 2
       %p There isn't any data available for comparison.
     #compareContainer
+    #compareOtherContainer
   .highlight.col-md-4
     - if @user.blank?
       - unless @link.blank?
@@ -22,41 +23,115 @@
 
 
 :javascript
-  $(function () {
-      $('#compareContainer').highcharts({
-          chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false
-          },
-          title: {
-              text: 'Your Perfomance'
-          },
-          tooltip: {
-      	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          },
-          plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: true,
-                      color: '#000000',
-                      connectorColor: '#000000',
-                      format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                  }
-              }
-          },
-          series: [{
-              type: 'pie',
-              name: 'Your Perfomance',
-              data: [
-                    #{topics_performance}
-              ]
-          }]
-      });
-  });
+   //Self comparison
+   $(function () {
+           $('#compareContainer').highcharts({
+               chart: {
+                   type: 'column'
+               },
+               title: {
+                   text: 'Performance Meter'
+               },
+               subtitle: {
+                   text: 'Your Performance in different topics'
+               },
+               xAxis: {
+                   categories: [
+                     #{topics_title}
+                   ],
+                   labels: {
+                                       rotation: -45,
+                                       align: 'right',
+                                       style: {
+                                           fontSize: '13px',
+                                           fontFamily: 'Verdana, sans-serif'
+                                       }
+                           }
+               },
+               yAxis: {
+                   min: 0,
+                   title: {
+                       text: 'Percentage (%)'
+                   }
+               },
+               tooltip: {
+                   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                       '<td style="padding:0"><b>{point.y:.1f} % </b></td></tr>',
+                   footerFormat: '</table>',
+                   shared: true,
+                   useHTML: true
+               },
+               plotOptions: {
+                   column: {
+                       pointPadding: 0.2,
+                       borderWidth: 0
+                   }
+               },
+               series: [{
+                   name: 'Performance',
+                   data: [#{topics_performance}]
 
+               }]
+           });
+       });
 
+   // Comparison with other
+   $(function () {
+           $('#compareOtherContainer').highcharts({
+               chart: {
+                   type: 'column'
+               },
+               title: {
+                   text: 'Performance Meter'
+               },
+               subtitle: {
+                   text: 'Your Performance in comparison to others(average) in different topics'
+               },
+               xAxis: {
+                   categories: [
+                     #{compare_topics_title}
+                   ],
+                   labels: {
+                              rotation: -45,
+                              align: 'right',
+                              style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                              }
+                           }
+               },
+               yAxis: {
+                   min: 0,
+                   title: {
+                       text: 'Percentage (%)'
+                   }
+               },
+               tooltip: {
+                   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                       '<td style="padding:0"><b>{point.y:.1f} % </b></td></tr>',
+                   footerFormat: '</table>',
+                   shared: true,
+                   useHTML: true
+               },
+               plotOptions: {
+                   column: {
+                       pointPadding: 0.2,
+                       borderWidth: 0
+                   }
+               },
+               series: [{
+                   name: 'You',
+                   data: [#{compare_your_performance}]
 
+               },
+               {
+                   name: 'Others',
+                   data: [#{compare_others_performance}]
+
+               }
+               ]
+           });
+       });
 
