@@ -1,10 +1,9 @@
 .row
   .highlight.col-md-7.mainQuestCont
     %h3 Comparison
-    - if @users.count < 2
-      %p There isn't any data available for comparison.
     #compareContainer
-    #compareOtherContainer
+    - if @users.count < 2
+      #compareOtherContainer
   .highlight.col-md-4
     - if @user.blank?
       - unless @link.blank?
