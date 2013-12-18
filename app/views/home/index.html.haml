@@ -79,7 +79,7 @@
         });
 
         //share source http://jquery-plugins.net/share-button-fast-and-beautiful-social-share-buttons
-        share_url = window.location + '/compare?link=true';
+        share_url = window.location + 'compare?link=true';
         share_text = $("#up_count").val() + ' - ' + $("#down_count").val();
         return $(".shareCircle").share({
           title: 'Yleistin',
@@ -88,7 +88,7 @@
           background: 'rgba(255,255,255,.5)',
           color: '#3B2B45',
           url: share_url,
-          text: "My general knowledge ranges " + share_text + " , checkout out yours " + share_url + " #Yleistin",
+          text: "My general knowledge ranges " + share_text + " , checkout out yours. #Yleistin",
           link: share_url,
         });
       }
