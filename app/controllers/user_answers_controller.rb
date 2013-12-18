@@ -63,7 +63,7 @@ class UserAnswersController < ApplicationController
 
   def u_answer_variables
     @remote_ip = request.remote_ip
-    @remote_ip = "192.169.0.2"
+    #@remote_ip = "192.169.0.2"
     @user = User.find_by_current_sign_in_ip(@remote_ip)
     @users = User.all
     @link = params[:link]
