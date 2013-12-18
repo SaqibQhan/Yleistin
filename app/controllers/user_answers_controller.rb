@@ -31,16 +31,24 @@ class UserAnswersController < ApplicationController
     @compare_topics = []
     unless @user_performance.blank?
       @user_performance.each do |u_performance|
-        performance_sum = 0
         performances = UserPerformance.where('user_id != ? and topic_id = ?', @user.id, u_performance.topic_id)
         unless performances.blank?
           @your_performance << u_performance.performance
           @compare_topics << u_performance.topic.title
-          performances.each do |p|
-            performance_sum = performance_sum + p.performance
-          end
+          performance_sum = performances.sum(:performance)
           @others_performance << (performance_sum.to_f / performances.count).to_f
         end
+      end
+    end
+
+    @all_performances = []
+    @all_topics = []
+    Topic.all.each do |topic|
+      total_topic_perform = UserPerformance.where(:topic_id => topic.id)
+      unless total_topic_perform.blank?
+        perform = total_topic_perform.sum(:performance)
+        @all_performances << (perform / (total_topic_perform.count).to_f).to_f
+        @all_topics << topic.title
       end
     end
 

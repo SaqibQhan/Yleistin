@@ -28,7 +28,8 @@
     %p
       %span#gKwldgEstUp 0 -
       %span#gKwldgEstDown 100%
-
+  #loaderDiv{:style => "display: none"}
+    %img.ajax-loader{src: "/assets/ajax-loader.gif", title: "LOADING"}/
   #compareOthers.highlight.col-md-4{:style => "display: none"}
     %a.btn.btn-success{href: "/compare"}
       %h3 Compare to others
@@ -65,6 +66,7 @@
           return answers.push(0);
         }
       } else {
+        $('#loaderDiv').show();
         q_ids = $('#q_ids').val();
         $.ajax({
           url: '/user_answers/save_answers?q_ids=' + q_ids + '&answers=' + answers + '&up_range=' + u_count + '&down_range=' + d_count,
@@ -74,6 +76,7 @@
           success: function(data) {
             $('#shareCircle').show();
             $('#compareOthers').show();
+            $('#loaderDiv').hide();
             return $('#questionsContainer').hide();
           }
         });
@@ -88,7 +91,7 @@
           background: 'rgba(255,255,255,.5)',
           color: '#3B2B45',
           url: share_url,
-          text: "My general knowledge ranges " + share_text + " , checkout out yours. #Yleistin",
+          text: "My general knowledge ranges " + share_text + " , checkout out yours at " + share_url + ". #Yleistin",
           link: share_url,
         });
       }

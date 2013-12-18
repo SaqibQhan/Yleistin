@@ -49,5 +49,24 @@ module ApplicationHelper
     return html
   end
 
+  def compare_no_performance
+    html = ''
+    unless @all_performances.blank?
+      @all_performances.each_with_index do |result, index|
+        html = "#{result}".to_s + ','.to_s + html.to_s
+      end
+    end
+    return html
+  end
+
+  def compare_no_topics_title
+    html = ''
+    unless @all_topics.blank?
+      @all_topics.each_with_index do |compare_topics, index|
+        html = "'#{compare_topics.camelize.pluralize}'".to_s + ','.to_s + html.to_s
+      end
+    end
+    return html
+  end
 
 end

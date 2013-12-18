@@ -1,8 +1,65 @@
 .row
   .highlight.col-md-7.mainQuestCont
     %h3 Comparison
+    - unless @user.blank?
+      :javascript
+         //Self comparison
+         $(function () {
+                 $('#compareContainer').highcharts({
+                     chart: {
+                         type: 'column'
+                     },
+                     title: {
+                         text: 'Performance Meter'
+                     },
+                     subtitle: {
+                         text: 'Your Performance in different topics'
+                     },
+                     xAxis: {
+                         categories: [
+                           #{topics_title}
+                         ],
+                         labels: {
+                                             rotation: -45,
+                                             align: 'right',
+                                             style: {
+                                                 fontSize: '13px',
+                                                 fontFamily: 'Verdana, sans-serif'
+                                             }
+                                 }
+                     },
+                     yAxis: {
+                         min: 0,
+                         title: {
+                             text: 'Percentage (%)'
+                         }
+                     },
+                     tooltip: {
+                         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                             '<td style="padding:0"><b>{point.y:.1f} % </b></td></tr>',
+                         footerFormat: '</table>',
+                         shared: true,
+                         useHTML: true
+                     },
+                     plotOptions: {
+                         column: {
+                             pointPadding: 0.2,
+                             borderWidth: 0
+                         }
+                     },
+                     series: [{
+                         name: 'Performance',
+                         data: [#{topics_performance}]
+
+                     }]
+                 });
+             });
+
+
+
     #compareContainer
-    - if @users.count > 1
+    - if @users.count > 1 and @link.blank?
       #compareOtherContainer
       :javascript
         // Comparison with other
@@ -64,6 +121,64 @@
                    });
         });
 
+    - unless @link.blank?
+      #compareNoContainer
+      :javascript
+        // Comparison with other
+        $(function () {
+                 $('#compareNoContainer').highcharts({
+                             chart: {
+                                 type: 'column'
+                             },
+                             title: {
+                                 text: 'Overall Performance Meter'
+                             },
+                             subtitle: {
+                                 text: 'Overall Performances(average) of other peoples in different topics'
+                             },
+                             xAxis: {
+                                 categories: [
+                                   #{compare_no_topics_title}
+                                 ],
+                                 labels: {
+                                            rotation: -45,
+                                            align: 'right',
+                                            style: {
+                                              fontSize: '13px',
+                                              fontFamily: 'Verdana, sans-serif'
+                                            }
+                                         }
+                             },
+                             yAxis: {
+                                 min: 0,
+                                 title: {
+                                     text: 'Percentage (%)'
+                                 }
+                             },
+                             tooltip: {
+                                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                     '<td style="padding:0"><b>{point.y:.1f} % </b></td></tr>',
+                                 footerFormat: '</table>',
+                                 shared: true,
+                                 useHTML: true
+                             },
+                             plotOptions: {
+                                 column: {
+                                     pointPadding: 0.2,
+                                     borderWidth: 0
+                                 }
+                             },
+                             series: [
+                             {
+                                 name: 'Performance',
+                                 data: [#{compare_no_performance}]
+
+                             }
+                             ]
+                 });
+        });
+
 
   .highlight.col-md-4
     - if @user.blank?
@@ -81,58 +196,4 @@
       %a.btn.btn-success{href: "/reset"}
         %h3 Reload Reset
 
-
-:javascript
-   //Self comparison
-   $(function () {
-           $('#compareContainer').highcharts({
-               chart: {
-                   type: 'column'
-               },
-               title: {
-                   text: 'Performance Meter'
-               },
-               subtitle: {
-                   text: 'Your Performance in different topics'
-               },
-               xAxis: {
-                   categories: [
-                     #{topics_title}
-                   ],
-                   labels: {
-                                       rotation: -45,
-                                       align: 'right',
-                                       style: {
-                                           fontSize: '13px',
-                                           fontFamily: 'Verdana, sans-serif'
-                                       }
-                           }
-               },
-               yAxis: {
-                   min: 0,
-                   title: {
-                       text: 'Percentage (%)'
-                   }
-               },
-               tooltip: {
-                   headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                   pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                       '<td style="padding:0"><b>{point.y:.1f} % </b></td></tr>',
-                   footerFormat: '</table>',
-                   shared: true,
-                   useHTML: true
-               },
-               plotOptions: {
-                   column: {
-                       pointPadding: 0.2,
-                       borderWidth: 0
-                   }
-               },
-               series: [{
-                   name: 'Performance',
-                   data: [#{topics_performance}]
-
-               }]
-           });
-       });
 
