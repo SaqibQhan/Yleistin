@@ -24,23 +24,26 @@ class UserAnswersController < ApplicationController
   end
 
   def compare
+    redirect_to root_path if @user.blank? and @link.blank?
     @user_performance = @user.user_performances unless @user.blank?
     @others_performance = []
     @your_performance = []
     @compare_topics = []
-    @user_performance.each do |u_performance|
-      performance_sum = 0
-      performances = UserPerformance.where('user_id != ? and topic_id = ?', @user.id, u_performance.topic_id)
-      unless performances.blank?
-        @your_performance << u_performance.performance
-        @compare_topics << u_performance.topic.title
-        performances.each do |p|
-          performance_sum = performance_sum + p.performance
+    unless @user_performance.blank?
+      @user_performance.each do |u_performance|
+        performance_sum = 0
+        performances = UserPerformance.where('user_id != ? and topic_id = ?', @user.id, u_performance.topic_id)
+        unless performances.blank?
+          @your_performance << u_performance.performance
+          @compare_topics << u_performance.topic.title
+          performances.each do |p|
+            performance_sum = performance_sum + p.performance
+          end
+          @others_performance << (performance_sum.to_f / performances.count).to_f
         end
-        @others_performance << (performance_sum.to_f / performances.count).to_f
       end
     end
-    redirect_to root_path if @user.blank? and @link.blank?
+
   end
 
   def reset
@@ -60,7 +63,7 @@ class UserAnswersController < ApplicationController
 
   def u_answer_variables
     @remote_ip = request.remote_ip
-    #@remote_ip = "192.169.1.1"
+    @remote_ip = "192.169.1.4"
     @user = User.find_by_current_sign_in_ip(@remote_ip)
     @users = User.all
     @link = params[:link]

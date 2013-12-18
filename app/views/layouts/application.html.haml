@@ -4,23 +4,9 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
       %title= content_for?(:title) ? yield(:title) : "yleistin"
       / for Google
-      %meta{content: "The Turducken of Cookies", name: "description"}/
-      %meta{content: "abc", name: "keywords"}/
-      %meta{content: "abc", name: "author"}/
-      %meta{content: "abc", name: "copyright"}/
-      %meta{content: "abc", name: "application-name"}/
-      / for Facebook
+      %meta{:name => 'description', :content => 'Yleistin: Test your general knowledge'}
+      %meta{:name => 'og:image',  :content => 'http://carrot.is/img/fb-share.jpg'}
       %meta{content: "453868088043151", property: "fb:app_id"}/
-      %meta{content: "social-cookbook:recipe", property: "og:type"}/
-      %meta{content: "http://samples.ogp.me/136756249803614", property: "og:url"}/
-      %meta{content: "Chocolate Pecan Pie", property: "og:title"}/
-      %meta{content: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-prn1/851565_496755187057665_544240989_n.jpg", property: "og:image"}/
-      %meta{content: "http://samples.ogp.me/390580850990722", property: "cookbook:author"}/
-      / for Twitter
-      %meta{content: "summary", name: "twitter:card"}/
-      %meta{content: "ABC", name: "twitter:title"}/
-      %meta{content: "The Turducken of Cookies", name: "twitter:description"}/
-      %meta{content: "http://fbwerks.com:8000/zhen/cookie.jpg", name: "twitter:image"}/
       %meta{:content => content_for?(:description) ? yield(:description) : "yleistin", :name => "description"}
         = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => false
         = javascript_include_tag "application", "data-turbolinks-track" => false
