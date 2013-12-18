@@ -63,7 +63,7 @@ class UserAnswersController < ApplicationController
 
   def u_answer_variables
     @remote_ip = request.remote_ip
-    @remote_ip = "192.169.1.4"
+    @remote_ip = "192.169.0.2"
     @user = User.find_by_current_sign_in_ip(@remote_ip)
     @users = User.all
     @link = params[:link]
@@ -73,7 +73,7 @@ class UserAnswersController < ApplicationController
   protected
 
   def user_performance(user)
-    @user_answers = user.user_answers unless @user.blank?
+    @user_answers = user.user_answers unless user.blank?
     @user_questions = Question.where(:id => [@user_answers.map { |u_ans| u_ans.question_id }]) unless @user_answers.blank?
     @uniq_questions = @user_questions.order('topic_id').pluck(:topic_id).uniq unless @user_questions.blank?
     @rand_topics = Topic.where(:id => [@uniq_questions]) unless @uniq_questions.blank?
